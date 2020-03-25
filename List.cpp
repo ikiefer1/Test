@@ -177,7 +177,7 @@ BinNode<T>* List<T>::find(string findWord, BinNode<T>* t)
 	
 }
 template<class T>
-BinNode<T>* findMin(BinNode<T>* t)
+BinNode<T>* List<T>::findMin(BinNode<T>* t)
 {
 	if (t == nullptr)
 	{
@@ -192,7 +192,7 @@ BinNode<T>* findMin(BinNode<T>* t)
 	}
 }
 template<class T>
-BinNode<T>* findMax(BinNode<T>* t)
+BinNode<T>* List<T>::findMax(BinNode<T>* t)
 {
 	if (t == nullptr)
 	{
@@ -206,13 +206,13 @@ BinNode<T>* findMax(BinNode<T>* t)
 		return findMax(t->right);
 	}
 }
-
-int max(int a, int b)
+template<class T>
+int List<T>::max(int a, int b)
 {
 	return (a > b) ? a : b;
 }
 template<class T>
-int height(BinNode<T>* t)
+int List<T>::height(BinNode<T>* t)
 {
 	if (t == nullptr)
 	{
@@ -221,7 +221,7 @@ int height(BinNode<T>* t)
 	return t->height;
 }
 template<class T>
-int getBalance(BinNode<T>* t)
+int List<T>::getBalance(BinNode<T>* t)
 {
 	if (t == nullptr)
 	{
@@ -230,7 +230,7 @@ int getBalance(BinNode<T>* t)
 	return height(t->left) - height(t->right);
 }
 template<class T>
-void rightRotate(BinNode<T>*& k2) 
+void List<T>::rightRotate(BinNode<T>*& k2)
 {
 	BinNode<T>* k1 = k2->left;
 	k2->left = k1->right;
@@ -241,7 +241,7 @@ void rightRotate(BinNode<T>*& k2)
 
 }
 template<class T>
-void leftRotate(BinNode<T>*& k2) 
+void List<T>::leftRotate(BinNode<T>*& k2)
 {
 	BinNode<T>* k1 = k2->right;
 	k2->right = k1->left;
@@ -251,13 +251,13 @@ void leftRotate(BinNode<T>*& k2)
 	k2 = k1;
 }
 template<class T>
-void doubleRotateR(BinNode<T>*& k3)
+void List<T>::doubleRotateR(BinNode<T>*& k3)
 {
 	leftRotate(k3->left);
 	rightRotate(k3);
 }
 template<class T>
-void doubleRotateL(BinNode<T>*& k3)
+void List<T>::doubleRotateL(BinNode<T>*& k3)
 {
 	rightRotate(k3->right);
 	leftRotate(k3);
