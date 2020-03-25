@@ -52,7 +52,7 @@ void List<T>::insert(string inWord, BinNode<T>*& t)
 	else if (inWord.compare(t->data) < 0)
 	{
 		
-		insert(inWord, t->left);
+		insert(inWord, t->left);/*
 		if (height(t->left) - height(t->right) == 2)
 		{
 			if (inWord < t->left->data)
@@ -64,13 +64,13 @@ void List<T>::insert(string inWord, BinNode<T>*& t)
 				 doubleRotateR(t);
 			}
 		}
-		
+		*/
 	}
 	else if (inWord.compare(t->data) > 0)
 	{
 		
 		insert(inWord, t->right);
-		if (height(t->right) - height(t->left) == 2)
+		/*if (height(t->right) - height(t->left) == 2)
 		{
 			if (inWord < t->right->data)
 			{
@@ -80,10 +80,10 @@ void List<T>::insert(string inWord, BinNode<T>*& t)
 			{
 				doubleRotateL(t);
 			}
-		}
+		}*/
 	}
 	t->height = 1 + max(height(t->left), height(t->right));
-	/*int balance = balance(t);
+	int balance = balance(t);
 	if (balance > 1 && inWord < t->left->data)
 	{
 		rightRotate(t);
@@ -99,7 +99,7 @@ void List<T>::insert(string inWord, BinNode<T>*& t)
 	else if (balance < -1 && inWord < t->right->data)
 	{
 		doubleRotateL(t);
-	}*/
+	}
 	
 }
 template<class T>
