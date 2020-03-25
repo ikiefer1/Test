@@ -92,7 +92,7 @@ void List<T>::insert(string inWord, BinNode<T>*& t)
 	{
 		leftRotate(t);
 	}
-	else if (balance > 1 && inWord > t->left->key)
+	else if (balance > 1 && inWord > t->left->data)
 	{
 		doubleRotateR(t);
 	}
