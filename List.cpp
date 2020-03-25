@@ -83,7 +83,7 @@ void List<T>::insert(string inWord, BinNode<T>*& t)
 		}*/
 	}
 	t->height = 1 + max(height(t->left), height(t->right));
-	int balance = balance(t);
+	int balance = getBalance(t);
 	if (balance > 1 && inWord < t->left->data)
 	{
 		rightRotate(t);
