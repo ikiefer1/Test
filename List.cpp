@@ -53,16 +53,37 @@ void List<T>::insert(string inWord, BinNode<T>*& t)
 	{
 		
 		insert(inWord, t->left);
+		if (height(t->left) - height(t->right) == 2)
+		{
+			if (inWord < t->left->data)
+			{
+				 rightRotate(t);
+			}
+			else
+			{
+				 doubleRotateR(t);
+			}
+		}
 		
 	}
 	else if (inWord.compare(t->data) > 0)
 	{
 		
 		insert(inWord, t->right);
-		
+		if (height(t->right) - height(t->left) == 2)
+		{
+			if (inWord < t->right->data)
+			{
+				leftRotate(t);
+			}
+			else
+			{
+				doubleRotateL(t);
+			}
+		}
 	}
 	t->height = 1 + max(height(t->left), height(t->right));
-	int balance = balance(t);
+	/*int balance = balance(t);
 	if (balance > 1 && inWord < t->left->data)
 	{
 		rightRotate(t);
@@ -78,7 +99,7 @@ void List<T>::insert(string inWord, BinNode<T>*& t)
 	else if (balance < -1 && inWord < t->right->data)
 	{
 		doubleRotateL(t);
-	}
+	}*/
 	
 }
 template<class T>
@@ -211,30 +232,34 @@ int getBalance(BinNode<T>* t)
 template<class T>
 void rightRotate(BinNode<T>*& k2) 
 {
-	BinNode<T>* k1 = k2->right;
-	k2->right = k1->left;
-	k1->left = k2;
-	k2 = k1;
-}
-template<class T>
-void leftRotate(BinNode<T>*& k2) 
-{
 	BinNode<T>* k1 = k2->left;
 	k2->left = k1->right;
 	k1->right = k2;
+	k2->height = max(height(k2->left), height(k2->right)) + 1;
+	k1->height = max(height(k1->right), k2->height) + 1;
 	k2 = k1;
 
 }
 template<class T>
+void leftRotate(BinNode<T>*& k2) 
+{
+	BinNode<T>* k1 = k2->right;
+	k2->right = k1->left;
+	k1->left = k2;
+	k2->height = max(height(k2->left), height(k2->right)) + 1;
+	k1->height = max(height(k2->right), k2->height) + 1;
+	k2 = k1;
+}
+template<class T>
 void doubleRotateR(BinNode<T>*& k3)
 {
-	rightRotate(k3->right);
+	leftRotate(k3->left);
 	rightRotate(k3);
 }
 template<class T>
 void doubleRotateL(BinNode<T>*& k3)
 {
-	leftRotate(k3->left);
+	rightRotate(k3->right);
 	leftRotate(k3);
 }
 

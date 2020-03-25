@@ -32,7 +32,7 @@ public:
 	//void printNode(void);
 	int max(int a, int b);
 	int height(BinNode<T>* t);
-	int getBalance(BinNode<T>* t)
+	int getBalance(BinNode<T>* t);
 	void rightRotate(BinNode<T>*& k2);
 	void leftRotate(BinNode<T>*& k2);
 	void doubleRotateR(BinNode<T>*& k3);

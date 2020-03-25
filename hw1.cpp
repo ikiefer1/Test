@@ -40,7 +40,7 @@ int main()
 	//dict.sort();
 	inDict.close();
 	tim.Start();
-	inBook.open("book.txt");
+	inBook.open("test.txt");
 	while (inBook >> bookBad)
 	{
 		clean = cleanWord(bookBad);
