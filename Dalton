@@ -1,30 +1,124 @@
-// List.h
-// Isaiah Kiefer
-
-#ifndef LIST_H
-#define LIST_H
-
+//List.cpp
+//Isaiah Kiefer
 #include <iostream>
+#include "Hash.h"
 #include <string>
-#include <vector>
-using std::vector;
+
 using std::string;
 using std::endl;
 using std::cout;
+#ifndef LIST_HC
+#define LIST_HC
 template<class T>
-class myHash {
-public:
-	const static int HashSize = 133169;//266549;
-	T* hash;
-	int size;
+myHash<T>::myHash()
+{
+	hash = new T[HashSize];
+	size = 0;
+	for (int i = 0; i < HashSize; i++)
+	{
+		hash[i] = "";
+	}
 
-	myHash();
-	~myHash();
-	void insertHash(T item);
-	bool findHash(T item);
-	int find(string word);
-	
-};
+}
+template<class T>
+myHash<T>::~myHash()
+{
+	delete[] hash;
+}
+template<class T>
+void myHash<T>::insertHash(T item)
+{
+	int key = findHash(item);
+	int att = 0;
+	if (hash[key] == "") 
+	{
+		hash[key] = item;
+		size++;
+	}
+	else {
+		bool found = false;
+		while (!found) 
+		{
+			att++;
+			key += att * att;
+			if (key > HashSize)
+			{
+				key = key - HashSize;
+			}
+			
+			if (hash[key] == "") 
+			{
+				hash[key] = item;
+				size++;
+				found = true;
+			}
+		}
+	}
+}
+template<class T>
+int myHash<T>::find(string word)
+{
+	long long int num = 0;
+	for (int i = 0; i <= word.size(); i++)
+	{
+		num += (int)word[i] * ((i+1) * (i+1));
+	}
+	return num % HashSize;
 
-#include "Hash.cpp"
+}
+template<class T>
+bool myHash<T>::findHash(T item)
+{
+	int key = findHash(item);
+	int att = 0;
+	if (hash[key].compare(item) == 0)
+	{     //found it
+		spell++;
+		tmpC++;
+		foundC += tmpC;
+		tmpC = 0;
+		return true;
+	}
+	else if (hash[key].compare("") == 0) 
+	{
+		notSpell++;
+		tmpC++;
+		notC += tmpC;
+		tmpC = 0;
+		text.push_back(item);
+		return false;
+	}
+	else
+	{
+		bool found = false;
+		while (!found) 
+		{
+			tmpC++;
+			att++;
+			key += att * att; //linear probing
+			if (key > HashSize)
+			{
+				key = key - HashSize;
+			}
+			if (hash[key].compare(item) == 0) 
+			{
+				spell++;
+				foundC += tmpC;
+				tmpC = 0;
+				return true; // or found = true;
+			}
+			else if (hash[key].compare("") == 0) 
+			{
+				notSpell++;
+				notC += tmpC;
+				tmpC = 0;
+				text.push_back(item);
+				return false;
+			}
+		}		
+	}
+	return false;
+}
+
+
 #endif
