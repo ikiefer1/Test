@@ -1,0 +1,30 @@
+// List.h
+// Isaiah Kiefer
+
+#ifndef LIST_H
+#define LIST_H
+
+#include <iostream>
+#include <string>
+#include <vector>
+using std::vector;
+using std::string;
+using std::endl;
+using std::cout;
+template<class T>
+class myHash {
+public:
+	const static int HashSize = 133169;//266549;
+	T* hash;
+	int size;
+
+	myHash();
+	~myHash();
+	void insertHash(T item);
+	bool findHash(T item);
+	int find(string word);
+	
+};
+
+#include "Hash.cpp"
+#endif
