@@ -73,7 +73,7 @@ bool myHash<T>::findHash(T item)
 	int att = 0;
 	if (hash[key].compare(item) == 0)
 	{     //found it
-		spell++;
+		sp++;
 		tmpC++;
 		foundC += tmpC;
 		tmpC = 0;
@@ -81,11 +81,11 @@ bool myHash<T>::findHash(T item)
 	}
 	else if (hash[key].compare("") == 0) 
 	{
-		notSpell++;
+		notSp++;
 		tmpC++;
 		notC += tmpC;
 		tmpC = 0;
-		text.push_back(item);
+		word.push_back(item);
 		return false;
 	}
 	else
@@ -102,17 +102,17 @@ bool myHash<T>::findHash(T item)
 			}
 			if (hash[key].compare(item) == 0) 
 			{
-				spell++;
+				sp++;
 				foundC += tmpC;
 				tmpC = 0;
 				return true; // or found = true;
 			}
 			else if (hash[key].compare("") == 0) 
 			{
-				notSpell++;
+				notSp++;
 				notC += tmpC;
 				tmpC = 0;
-				text.push_back(item);
+				word.push_back(item);
 				return false;
 			}
 		}		
